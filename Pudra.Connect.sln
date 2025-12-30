@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C020D777-A8A5-427F-ADBA-38FCC7499A55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{19FF7702-6051-415E-BCAA-0A8A14A1AD1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pudra.Connect.Domain", "src\Backend\Pudra.Connect.Domain\Pudra.Connect.Domain.csproj", "{55649608-841B-49FF-AF81-29D9774999A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pudra.Connect.Application", "src\Backend\Pudra.Connect.Application\Pudra.Connect.Application.csproj", "{31820833-4168-4E63-B89F-0E59CCDFE0E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pudra.Connect.Infrastructure", "src\Backend\Pudra.Connect.Infrastructure\Pudra.Connect.Infrastructure.csproj", "{105E55D1-8BA4-4A3D-877C-D9456620B7A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pudra.Connect.Api", "src\Backend\Pudra.Connect.Api\Pudra.Connect.Api.csproj", "{C6F41AC8-EACB-4BBE-A3AF-3FFF83A803CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{A8CAED56-B981-451D-9E45-E055926FE360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pudra.Connect.App", "src\Mobile\Pudra.Connect.App\Pudra.Connect.App.csproj", "{4A4C37B3-079D-4D86-808D-B6EC06F8F65B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55649608-841B-49FF-AF81-29D9774999A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55649608-841B-49FF-AF81-29D9774999A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55649608-841B-49FF-AF81-29D9774999A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55649608-841B-49FF-AF81-29D9774999A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31820833-4168-4E63-B89F-0E59CCDFE0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31820833-4168-4E63-B89F-0E59CCDFE0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31820833-4168-4E63-B89F-0E59CCDFE0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31820833-4168-4E63-B89F-0E59CCDFE0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{105E55D1-8BA4-4A3D-877C-D9456620B7A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105E55D1-8BA4-4A3D-877C-D9456620B7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105E55D1-8BA4-4A3D-877C-D9456620B7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{105E55D1-8BA4-4A3D-877C-D9456620B7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F41AC8-EACB-4BBE-A3AF-3FFF83A803CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F41AC8-EACB-4BBE-A3AF-3FFF83A803CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F41AC8-EACB-4BBE-A3AF-3FFF83A803CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F41AC8-EACB-4BBE-A3AF-3FFF83A803CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A4C37B3-079D-4D86-808D-B6EC06F8F65B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A4C37B3-079D-4D86-808D-B6EC06F8F65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A4C37B3-079D-4D86-808D-B6EC06F8F65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A4C37B3-079D-4D86-808D-B6EC06F8F65B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19FF7702-6051-415E-BCAA-0A8A14A1AD1D} = {C020D777-A8A5-427F-ADBA-38FCC7499A55}
+		{55649608-841B-49FF-AF81-29D9774999A5} = {19FF7702-6051-415E-BCAA-0A8A14A1AD1D}
+		{31820833-4168-4E63-B89F-0E59CCDFE0E3} = {19FF7702-6051-415E-BCAA-0A8A14A1AD1D}
+		{105E55D1-8BA4-4A3D-877C-D9456620B7A0} = {19FF7702-6051-415E-BCAA-0A8A14A1AD1D}
+		{C6F41AC8-EACB-4BBE-A3AF-3FFF83A803CC} = {19FF7702-6051-415E-BCAA-0A8A14A1AD1D}
+		{A8CAED56-B981-451D-9E45-E055926FE360} = {C020D777-A8A5-427F-ADBA-38FCC7499A55}
+		{4A4C37B3-079D-4D86-808D-B6EC06F8F65B} = {A8CAED56-B981-451D-9E45-E055926FE360}
+	EndGlobalSection
+EndGlobal
