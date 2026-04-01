@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Pudra.Connect.App.Models"
+             xmlns:vm="clr-namespace:Pudra.Connect.App.ViewModels"
+             xmlns:products="clr-namespace:Pudra.Connect.App.Models.Products"
+             xmlns:behaviors="clr-namespace:Pudra.Connect.App.Behaviors"
+             x:Class="Pudra.Connect.App.Views.SearchPage"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnPageAreaTapped" />
+        </Grid.GestureRecognizers>
+        <SearchBar Grid.Row="0"
+                   Placeholder="Ürün adı veya kodu girin..."
+                   Text="{Binding SearchText}"
+                   SearchCommand="{Binding SearchCommand}"
+                   x:Name="SearchBarObject"
+                   SearchButtonPressed="OnSearchButtonPressed">
+            <SearchBar.Behaviors>
+                <behaviors:DismissKeyboardOnSearchBehavior />
+            </SearchBar.Behaviors>
+            
+        </SearchBar>
+            
+             
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding SearchResults}"
+                        Scrolled="ItemsView_OnScrolled"
+                        SelectionMode="None"
+                       
+                        SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="products:ProductResultDto">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="Close">
+                                <SwipeItem Text="Detay"
+                                           BackgroundColor="DarkCyan"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchViewModel}}, Path=SelectProductCommand}"
+                                           CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                    <Border HeightRequest="120" Margin="10,5" Padding="15" StrokeThickness="0" BackgroundColor="{AppThemeBinding Light=White, Dark=#2c2c2c}" StrokeShape="RoundRectangle 12">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="3,3" Radius="8" Opacity="0.1"/>
+                        </Border.Shadow>
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="5">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" FontAttributes="Bold" FontSize="Large" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding ProductCode}" FontSize="Caption" TextColor="Gray" />
+                            
+                            <VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="End" Spacing="2">
+                                <Label Text="{Binding WholesalePrice, StringFormat='{0:C}'}" FontSize="Large" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#F97A00, Dark=#FED16A}" HorizontalTextAlignment="End"/>
+                                <Label Text="{Binding RetailPrice, StringFormat='PSF: {0:C}'}" FontSize="Caption" TextColor="Gray" HorizontalTextAlignment="End"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+        <Label Grid.Row="1"
+               Text="Arama sonucu bulunamadı."
+               IsVisible="{Binding ShowNoResultsMessage}"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="Gray"/>
+        <ActivityIndicator Grid.Row="1" 
+                           IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}"
+                           HorizontalOptions="Center" VerticalOptions="Center"/>
+    </Grid>
+</ContentPage>

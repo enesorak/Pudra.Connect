@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Pudra.Connect.App.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="vm:ProductDetailViewModel"
+             x:Class="Pudra.Connect.App.Views.ProductDetailPage"
+             Title="Ürün Detayı">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IntToBoolConverter x:Key="IntToBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <ActivityIndicator  
+                           HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <ScrollView >
+            <VerticalStackLayout Padding="20" Spacing="15" Margin="10,20">
+
+                <VerticalStackLayout Spacing="5" Margin="0,0,0,10">
+                    <Label Text="{Binding Product.Name}" FontSize="24" FontAttributes="Bold" HorizontalTextAlignment="Start"/>
+                    <Label Text="{Binding Product.ProductCode, StringFormat='Ürün Kodu: {0}'}" FontSize="16" TextColor="Gray" HorizontalTextAlignment="Start"/>
+                </VerticalStackLayout>
+                
+                <Border Style="{StaticResource CardView}">
+                    <Grid ColumnDefinitions="*,*" Padding="25" RowSpacing="5" ColumnSpacing="100">
+                        <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="5">
+                            <Label Text="TSF" Style="{StaticResource CardTitle}"/>
+                            <Label FontSize="Large" Text="{Binding Product.WholesalePrice, StringFormat='{0:C}'}" Style="{StaticResource CardValue}" TextColor="{AppThemeBinding Light=#F97A00, Dark=#FED16A}"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="5">
+                            <Label Text="PSF" Style="{StaticResource CardTitle}"/>
+                            <Label FontSize="Large" Text="{Binding Product.RetailPrice, StringFormat='{0:C}'}" Style="{StaticResource CardValue}"/>
+                        </VerticalStackLayout>
+                       
+                    </Grid>
+                </Border>
+
+                
+                
+                 
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+
+</ContentPage>

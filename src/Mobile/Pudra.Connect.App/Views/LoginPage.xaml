@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pudra.Connect.App.Views.LoginPage"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+              >
+    <Grid>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding UnfocusCommand}" />
+        </Grid.GestureRecognizers>
+
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+            
+            <Image Source="company_logo.png" HeightRequest="100" Margin="0,0,0,30"/>
+
+            <Entry x:Name="UsernameEntry"
+                   Placeholder="Kullanıcı Adı" 
+                   Text="{Binding Username}" 
+                   Keyboard="Email"
+                   ReturnCommand="{Binding LoginCommand}"/>
+
+            <Entry Placeholder="Şifre" 
+                   Text="{Binding Password}" 
+                   IsPassword="True"
+                   Keyboard="Numeric"  Completed="OnLoginClicked" />
+            <Button Text="Giriş Yap" 
+                    Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    HorizontalOptions="Fill"/>
+            <HorizontalStackLayout VerticalOptions="Center" Spacing="10">
+                <CheckBox IsChecked="{Binding RememberMe}"/>
+                <Label Text="Beni Hatırla" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+            
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}"
+                               HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

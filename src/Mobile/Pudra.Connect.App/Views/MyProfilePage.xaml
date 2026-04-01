@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pudra.Connect.App.Views.MyProfilePage">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="15">
+            <Border Style="{StaticResource CardView}">
+                <VerticalStackLayout Spacing="0">
+                    <Grid   >
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Profil Bilgileri" FontSize="Small" FontAttributes="Bold"/>
+                            <Entry Placeholder="Tam Ad" Text="{Binding FullName}" />
+                            <Button Text="Bilgileri Güncelle" Command="{Binding UpdateProfileCommand}" IsEnabled="{Binding IsNotBusy}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                    <BoxView Style="{StaticResource Separator}" Margin="0,20"/>
+                    <Grid   >
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Şifre Değiştir" FontSize="Small" FontAttributes="Bold"/>
+                            
+                            <Entry Placeholder="Eski Şifre" Text="{Binding OldPassword}" IsPassword="True" Keyboard="Numeric" />
+                            <Entry Placeholder="Yeni Şifre" Text="{Binding NewPassword}" IsPassword="True" Keyboard="Numeric" />
+
+                            <Button Text="Şifreyi Değiştir" Command="{Binding ChangePasswordCommand}" IsEnabled="{Binding IsNotBusy}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                     
+                </VerticalStackLayout>
+            </Border>
+         
+            
+           
+            
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

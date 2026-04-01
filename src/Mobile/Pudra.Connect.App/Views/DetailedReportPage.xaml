@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Pudra.Connect.App.Views.DetailedReportPage">
+<Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Padding="15" Spacing="10" Grid.Row="0">
+            <DatePicker Date="{Binding StartDate}" />
+            <DatePicker Date="{Binding EndDate}" />
+            <Button Text="Raporu Getir" Command="{Binding LoadReportCommand}" HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="15" Spacing="15">
+
+                <Label Text="Mağaza Performansı" FontSize="18" FontAttributes="Bold" />
+                <CollectionView ItemsSource="{Binding StoreReport}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CardView}" Padding="15">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding StoreId}" FontAttributes="Bold" FontSize="Title"/>
+                                    <Label Text="{Binding NetAmount, StringFormat='Net Satış: {0:C0}'}" FontSize="Subtitle" TextColor="Green"/>
+
+                                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="5" Margin="0,5,0,0">
+                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
+                                            <Label Text="{Binding TotalSales, StringFormat='Satış: {0:C0}'}" FontSize="Caption" TextColor="Green"/>
+                                            <Label Text="{Binding SaleCount, StringFormat='({0} adet)'}" FontSize="Caption" TextColor="Gray"/>
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                                            <Label Text="{Binding TotalReturns, StringFormat='İade: {0:C0}'}" FontSize="Caption" TextColor="Red"/>
+                                            <Label Text="{Binding ReturnCount, StringFormat='({0} adet)'}" FontSize="Caption" TextColor="Gray"/>
+                                        </HorizontalStackLayout>
+                
+                                        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                                            <Label Text="{Binding TotalDiscount, StringFormat='İskonto: {0:C0}'}" FontSize="Caption" FontAttributes="Italic" TextColor="Orange"/>
+                                        </HorizontalStackLayout>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Personel Performansı" FontSize="18" FontAttributes="Bold" Margin="0,20,0,0" />
+                <CollectionView ItemsSource="{Binding SellerReport}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CardView}" Padding="15">
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding Seller}" FontAttributes="Bold" FontSize="Title"/>
+                                    <Label Text="{Binding NetAmount, StringFormat='Net Satış: {0:C0}'}" FontSize="Subtitle" TextColor="Green"/>
+
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding TotalSales, StringFormat='Satış: {0:C0}'}" FontSize="Caption"/>
+                                        <Label Text="{Binding SaleCount, StringFormat='({0} adet)'}" FontSize="Caption" TextColor="Gray"/>
+                                        </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

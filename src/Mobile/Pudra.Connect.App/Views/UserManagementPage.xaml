@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Pudra.Connect.App.ViewModels"
+             xmlns:models="clr-namespace:Pudra.Connect.App.Models.Users"
+             xmlns:converters="clr-namespace:Pudra.Connect.App.Converters"
+             x:Class="Pudra.Connect.App.Views.UserManagementPage">
+     <ContentPage.Resources>
+        <converters:BoolToInverseBoolConverter x:Key="InverseBoolConverter" />
+    </ContentPage.Resources>
+    
+   <ContentPage.ToolbarItems> 
+        <ToolbarItem Text="Yeni Ekle" Command="{Binding GoToCreateUserCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding LoadUsersCommand}">
+        <CollectionView ItemsSource="{Binding Users}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:UserDto">
+                <SwipeView>
+                    
+                    <SwipeView.LeftItems>
+                        <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem Text="Düzenle"
+                                       BackgroundColor="DarkOrange"
+                                       Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserManagementViewModel}}, Path=GoToEditUserCommand}"
+                                       CommandParameter="{Binding .}"/>
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem Text="Sil"
+                                       BackgroundColor="OrangeRed"
+                                       Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserManagementViewModel}}, Path=DeleteUserCommand}"
+                                       CommandParameter="{Binding .}"/>
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <VerticalStackLayout Spacing="0">
+                        <Grid Padding="15" ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding FullName, FallbackValue='İsim Yüklenemedi'}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Username, FallbackValue='K.Adı Yüklenemedi'}" FontSize="Small" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                            <Label Grid.Column="1" Text="{Binding Role}" VerticalOptions="Center"/>
+                        </Grid>
+                        
+                        <BoxView HeightRequest="1" Color="{AppThemeBinding Light=#E0E0E0, Dark=#424242}" Margin="15,0,0,0"/>
+                    </VerticalStackLayout>
+                    
+                </SwipeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    </RefreshView>
+</ContentPage>

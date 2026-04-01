@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Pudra.Connect.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Pudra.Connect.App"
+    xmlns:views="clr-namespace:Pudra.Connect.App.Views"
+    xmlns:helpers="clr-namespace:Pudra.Connect.App.Helpers"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Pudra.Connect.App"
+    
+ 
+       Shell.TabBarBackgroundColor="Transparent" 
+      
+        Shell.TabBarUnselectedColor="Gray"
+    >
+
+    <TabBar Route="Main">
+        <ShellContent
+            x:Name="DashboardTab"
+            Title="Genel Bakış"
+            ContentTemplate="{DataTemplate views:DashboardPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static helpers:IconFont.Dashboard}"  />
+            </ShellContent.Icon>
+        </ShellContent>
+            
+        <ShellContent
+            Title="Ara"
+            ContentTemplate="{DataTemplate views:SearchPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static helpers:IconFont.Search}" Color="{AppThemeBinding Light={StaticResource Primary}, Dark=White}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        
+        <ShellContent
+            Title="Tara"
+            ContentTemplate="{DataTemplate views:ScanPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static helpers:IconFont.Scan}" Color="{AppThemeBinding Light={StaticResource Primary}, Dark=White}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        
+      
+        
+        <ShellContent
+            Title="Ayarlar"
+            ContentTemplate="{DataTemplate views:SettingsPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static helpers:IconFont.Settings}" Color="{AppThemeBinding Light={StaticResource Primary}, Dark=White}"/>
+            </ShellContent.Icon>
+        </ShellContent>
+    </TabBar>
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage" />
+</Shell>

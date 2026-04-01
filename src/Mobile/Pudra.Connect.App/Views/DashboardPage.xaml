@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Pudra.Connect.App.ViewModels"
+             xmlns:helpers="clr-namespace:Pudra.Connect.App.Helpers"
+             xmlns:models="clr-namespace:Pudra.Connect.App.Models.Dashboard"
+             x:DataType="vm:DashboardViewModel"
+             x:Class="Pudra.Connect.App.Views.DashboardPage"
+             Shell.NavBarIsVisible="False">
+ 
+ <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding LoadDataCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static helpers:IconFont.Refresh}" Color="{AppThemeBinding Light=Black, Dark=White}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <RefreshView Command="{Binding LoadDataCommand}"  IsRefreshing="{Binding IsRefreshing}">
+            <ScrollView>
+                <VerticalStackLayout Spacing="15" Padding="15">
+                    
+                    <Label Text="Mağaza Detayları"  FontSize="Large" Margin="0,15,0,0"/>
+                    
+                    <CollectionView ItemsSource="{Binding StoreKpis}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:StoreKpiDto">
+                                <Border Style="{StaticResource CardView}" Padding="15" Margin="0,0,0,10">
+                                    <VerticalStackLayout Spacing="8">
+                                        <Label Text="{Binding StoreId}" FontAttributes="Bold" FontSize="Title"/>
+                                        <Label Text="{Binding NetAmount, StringFormat='Net Satış: {0:C0}'}" FontSize="Subtitle" TextColor="Green"/>
+
+                                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="5" Margin="0,5,0,0">
+                                            <Label Grid.Column="0" Text="{Binding TodaysTurnover, StringFormat='Satış: {0:C0}'}" FontSize="Caption" TextColor="Green"/>
+                                            <Label Grid.Column="1" Text="{Binding TodaysReturnAmount, StringFormat='İade: {0:C0}'}" FontSize="Caption" TextColor="Red"/>
+                                            <Label Grid.Column="2" Text="{Binding TodaysDiscount, StringFormat='İskonto: {0:C0}'}" FontSize="Caption" TextColor="Orange"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
+                    <Button Text="Tarih Bazlı Detaylı Raporlar" Command="{Binding GoToDetailedReportCommand}" Margin="0,20,0,0"/>
+
+
+                </VerticalStackLayout>
+          
+            </ScrollView>
+        </RefreshView>
+       
+     </Grid>
+</ContentPage>
