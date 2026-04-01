@@ -1,0 +1,184 @@
+# =========================
+# .NET MAUI .gitignore
+# =========================
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.cache
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Rider
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# MSBuild
+*.log
+msbuild.binlog
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Publish output
+publish/
+PublishOutput/
+
+# MAUI Specific
+*.apk
+*.aab
+*.ipa
+*.app
+*.msix
+*.msixbundle
+*.appxbundle
+*.appx
+*.appxupload
+
+# Android
+*.keystore
+!debug.keystore
+google-services.json
+
+# iOS
+*.dSYM.zip
+*.dSYM
+Entitlements.plist
+
+# macOS
+*.dmg
+*.pkg
+
+# Windows
+*.pfx
+*.appinstaller
+
+# Tizen
+*.tpk
+
+# User-specific files
+*.rsuser
+*.userprefs
+
+# Mono
+mono_crash.*
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Benchmark Results
+BenchmarkDotNet.Artifacts/
+
+# Publish profiles
+PublishProfiles/
+
+# Code Coverage
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# Secrets & Config
+appsettings.local.json
+appsettings.Development.json
+secrets.json
+*.secrets.json
+
+# Local environment
+.env
+.env.local
+.env.*.local
+local.settings.json
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# JetBrains Rider
+*.sln.iml
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# DocProject
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Backup & Temp
+*~
+*.bak
+*.tmp
+*.temp
+*.swp
+
+# Misc
+ClientBin/
+~$*
+*~
+StyleCopReport.xml
+*.dbmdl
+*.mdf
+*.ldf
+*.ndf
+Generated_Code/
+_UpgradeReport_Files/
+UpgradeLog*.XML
+UpgradeLog*.htm
