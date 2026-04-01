@@ -97,6 +97,9 @@ public static class DependencyInjection
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IUserService, UserService>();
 
+            
+            services.AddScoped<IScanAnalyticsService, ScanAnalyticsService>();
+            
             return services;
         }
     }

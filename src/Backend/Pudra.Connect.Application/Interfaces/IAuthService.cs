@@ -5,4 +5,6 @@ public interface IAuthService
 {
     Task<LoginResponseDto> LoginAsync(LoginRequestDto request);
     Task<bool> RegisterAsync(string username, string fullName, string password, string role);
+    Task<PublicRegisterResponseDto> PublicRegisterAsync(PublicRegisterRequestDto request); // YENİ
+
 }

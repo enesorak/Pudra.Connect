@@ -10,7 +10,8 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
- 
+    public DbSet<ScanLog> ScanLogs { get; set; } // YENİ
+
     
     // Not: Sale ve Return entity'lerini eklediğimizde DbSet'lerini buraya ekleyeceğiz.
 
@@ -21,6 +22,23 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
+        
+        
+        // ScanLog indexes
+        modelBuilder.Entity<ScanLog>()
+            .HasIndex(s => s.UserId);
+        
+        modelBuilder.Entity<ScanLog>()
+            .HasIndex(s => s.Barcode);
+        
+        modelBuilder.Entity<ScanLog>()
+            .HasIndex(s => s.ScannedAt);
+
+        modelBuilder.Entity<ScanLog>()
+            .HasOne(s => s.User)
+            .WithMany()
+            .HasForeignKey(s => s.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);
     }

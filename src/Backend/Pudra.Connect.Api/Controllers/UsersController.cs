@@ -66,4 +66,35 @@ public class UsersController : ControllerBase
         }
         return NoContent(); // Başarılı güncellemede (204 No Content) döneriz.
     }
+    
+    
+    // Pending kullanıcıları listele
+    [HttpGet("pending")]
+    public async Task<IActionResult> GetPendingUsers()
+    {
+        var users = await _userService.GetPendingUsersAsync();
+        return Ok(users);
+    }
+
+// Kullanıcıyı onayla
+    [HttpPost("{id}/approve")]
+    public async Task<IActionResult> ApproveUser(string id)
+    {
+        var success = await _userService.ApproveUserAsync(id);
+        if (!success)
+            return NotFound(new { message = "User not found." });
+    
+        return Ok(new { message = "User approved successfully." });
+    }
+
+// Kullanıcıyı reddet
+    [HttpPost("{id}/reject")]
+    public async Task<IActionResult> RejectUser(string id)
+    {
+        var success = await _userService.RejectUserAsync(id);
+        if (!success)
+            return NotFound(new { message = "User not found." });
+    
+        return Ok(new { message = "User rejected." });
+    }
 }

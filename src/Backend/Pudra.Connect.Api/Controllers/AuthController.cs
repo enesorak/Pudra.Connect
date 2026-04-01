@@ -42,4 +42,19 @@ public class AuthController : ControllerBase
         }
         return BadRequest(new { message = "Username already exists or an error occurred." });
     }
+   
+   
+    [HttpPost("public-register")]
+    [AllowAnonymous]
+    public async Task<IActionResult> PublicRegister([FromBody] PublicRegisterRequestDto request)
+    {
+        var response = await _authService.PublicRegisterAsync(request);
+        
+        if (response.Success)
+        {
+            return Ok(response);
+        }
+        
+        return BadRequest(response);
+    }
 }
