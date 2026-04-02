@@ -51,8 +51,8 @@ public class ApiService : IApiService
             request.Content = JsonContent.Create(payload);
         }
 
-        // Login gibi bazı istekler token gerektirmez.
-        var response = requestUri.Contains("api/auth/login")
+        // Login ve Register token gerektirmez
+        var response = (requestUri.Contains("api/auth/login") || requestUri.Contains("api/auth/public-register"))
             ? await _httpClient.SendAsync(request)
             : await SendAuthenticatedRequestAsync(request);
 

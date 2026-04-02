@@ -23,4 +23,10 @@ public class ProfileService : IProfileService
         var response = await _apiService.PutAsync("/api/profile/change-password", passwordDto);
         return response.IsSuccessStatusCode;
     }
+    
+    public async Task<bool> UpdateProfileImageAsync(string base64Image)
+    {
+        var response = await _apiService.PutAsync("/api/profile/image", new { imageBase64 = base64Image });
+        return response.IsSuccessStatusCode;
+    }
 }

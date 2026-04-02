@@ -98,6 +98,10 @@ public static class MauiProgram
 		builder.Services.AddTransient<MyProfilePage>();
 		builder.Services.AddTransient<MyProfileViewModel>();
 		
+		
+		builder.Services.AddTransient<RegisterPage>();
+		builder.Services.AddTransient<RegisterViewModel>();
+		
 	 
 
 // Yüksek seviye, özelliğe özel servisler

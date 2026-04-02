@@ -3,65 +3,190 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:helpers="clr-namespace:Pudra.Connect.App.Helpers"
+             xmlns:vm="clr-namespace:Pudra.Connect.App.ViewModels"
+             x:DataType="vm:SettingsViewModel"
              x:Class="Pudra.Connect.App.Views.SettingsPage"
              BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"
-
              Shell.NavBarIsVisible="False">
     
-   <ScrollView>
-         <VerticalStackLayout Spacing="20" Padding="15">
-             
-             <Label Text="Hesap" FontSize="Micro" Style="{StaticResource Headline}" Margin="5,0"/>
-             <Border Style="{StaticResource CardView}">
-                 <VerticalStackLayout Spacing="0">
-                     <Grid Padding="15,10" ColumnDefinitions="Auto,*">
-                         <Label Grid.Column="0" Text="Kullanıcı Adı" />
-                         <Label Grid.Column="1" Text="{Binding UserName}" HorizontalOptions="End" TextColor="Gray"/>
-                     </Grid>
-                     <BoxView Style="{StaticResource Separator}"/>
-                     <Grid Padding="15,10" ColumnDefinitions="Auto,*">
-                         <Label Grid.Column="0" Text="Rol" />
-                         <Label Grid.Column="1" Text="{Binding UserRole}" HorizontalOptions="End" TextColor="Gray"/>
-                     </Grid>
-                      <BoxView Style="{StaticResource Separator}"/>
-                      <Grid Padding="15,10">
-                          <Grid.GestureRecognizers>
-                              <TapGestureRecognizer Command="{Binding GoToMyProfileCommand}"/>
-                          </Grid.GestureRecognizers>
-                          <Label Text="Profili Düzenle"/>
-                          <Label Text="{x:Static helpers:IconFont.ChevronRight}" FontFamily="MaterialSymbols" HorizontalOptions="End" TextColor="Gray"/>
-                      </Grid>
-                 </VerticalStackLayout>
-             </Border>
- 
-             <Label Text="Yönetim" FontSize="Micro" Style="{StaticResource Headline}" Margin="5,0"/>
-             <Border Style="{StaticResource CardView}">
-                 <VerticalStackLayout>
-                     
-                     <Grid Padding="15,10" IsVisible="{Binding IsAdmin}">
-                         <Grid.GestureRecognizers>
-                             <TapGestureRecognizer Command="{Binding GoToUserManagementCommand}"/>
-                         </Grid.GestureRecognizers>
-                         <Label Text="Kullanıcı Yönetimi" />
-                         <Label Text="{x:Static helpers:IconFont.ChevronRight}" FontFamily="MaterialSymbols" HorizontalOptions="End" TextColor="Gray"/>
-                     </Grid>
-                  
-                     
-                 </VerticalStackLayout>
-               
-                 
-             </Border>
-             <Border Style="{StaticResource CardView}">
-                 <Grid Padding="15,10">
-                     <Grid.GestureRecognizers>
-                         <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
-                     </Grid.GestureRecognizers>
-                     <Label Text="Çıkış Yap" />
-                     <Label Text="{x:Static helpers:IconFont.Logout}" FontFamily="MaterialSymbols" HorizontalOptions="End" TextColor="Gray"/>
-                 </Grid>
-             </Border>
-             
- 
-         </VerticalStackLayout>
-     </ScrollView>
-</ContentPage>
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="15">
+            
+            <!-- Profil Başlık -->
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" Margin="0,20,0,10">
+                
+                <!-- Profil Resmi -->
+                <Grid WidthRequest="120" HeightRequest="120" HorizontalOptions="Center">
+                    <Border StrokeShape="RoundRectangle 60" 
+                            StrokeThickness="3" 
+                            Stroke="{StaticResource Primary}"
+                            BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#424242}"
+                            WidthRequest="120" 
+                            HeightRequest="120">
+                        <Image Source="{Binding ProfileImageUrl}" 
+                               Aspect="AspectFill"
+                               WidthRequest="114"
+                               HeightRequest="114"/>
+                    </Border>
+                    
+                    <!-- Kamera İkonu (Düzenle) -->
+                    <Border StrokeShape="RoundRectangle 18"
+                            BackgroundColor="{StaticResource Primary}"
+                            WidthRequest="36"
+                            HeightRequest="36"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"
+                            Margin="0,0,5,5">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ChangeProfileImageCommand}"/>
+                        </Border.GestureRecognizers>
+                        <Label Text="📷" 
+                               FontSize="18" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"/>
+                    </Border>
+                </Grid>
+                
+                <!-- İsim -->
+                <Label Text="{Binding UserName}" 
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       HorizontalTextAlignment="Center"/>
+                
+                <!-- E-posta -->
+                <Label Text="{Binding UserEmail}" 
+                       FontSize="14" 
+                       TextColor="Gray" 
+                       HorizontalTextAlignment="Center"/>
+                
+                <!-- Durum Badge -->
+                <Border StrokeShape="RoundRectangle 12"
+                        BackgroundColor="{Binding StatusColor}"
+                        Padding="15,5"
+                        HorizontalOptions="Center">
+                    <Label Text="{Binding StatusText}" 
+                           FontSize="12" 
+                           TextColor="White"/>
+                </Border>
+            </VerticalStackLayout>
+            
+            <!-- Tarama Hakkı -->
+            <Border Style="{StaticResource CardView}">
+                <Grid Padding="15" ColumnDefinitions="Auto,*,Auto">
+                    <Label Grid.Column="0" Text="🎯" FontSize="24" VerticalOptions="Center"/>
+                    <VerticalStackLayout Grid.Column="1" Margin="15,0,0,0" VerticalOptions="Center">
+                        <Label Text="Tarama Hakkı" FontAttributes="Bold"/>
+                        <Label Text="{Binding ScanLimitDescription}" FontSize="12" TextColor="Gray"/>
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" 
+                           Text="{Binding RemainingScansText}" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           TextColor="{StaticResource Primary}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+            
+            <!-- Profil Ayarları -->
+            <Label Text="Profil" FontSize="Micro" Style="{StaticResource Headline}" Margin="5,10,0,0"/>
+            <Border Style="{StaticResource CardView}">
+                <VerticalStackLayout Spacing="0">
+                    <Grid Padding="15,12">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToEditProfileCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="✏️" FontSize="18" VerticalOptions="Center"/>
+                            <Label Text="Profili Düzenle" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Label Text="{x:Static helpers:IconFont.ChevronRight}" 
+                               FontFamily="MaterialSymbols" 
+                               HorizontalOptions="End" 
+                               VerticalOptions="Center"
+                               TextColor="Gray"/>
+                    </Grid>
+                    
+                    <BoxView Style="{StaticResource Separator}"/>
+                    
+                    <Grid Padding="15,12">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToChangePasswordCommand}"/>
+                        </Grid.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="🔒" FontSize="18" VerticalOptions="Center"/>
+                            <Label Text="Şifre Değiştir" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Label Text="{x:Static helpers:IconFont.ChevronRight}" 
+                               FontFamily="MaterialSymbols" 
+                               HorizontalOptions="End" 
+                               VerticalOptions="Center"
+                               TextColor="Gray"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            
+            <!-- Yönetim - Sadece Admin'e Görünür -->
+            <VerticalStackLayout IsVisible="{Binding IsAdmin}" Spacing="10">
+                <Label Text="Yönetim" FontSize="Micro" Style="{StaticResource Headline}" Margin="5,10,0,0"/>
+                <Border Style="{StaticResource CardView}">
+                    <VerticalStackLayout Spacing="0">
+                        <Grid Padding="15,12">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToUserManagementCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="👥" FontSize="18" VerticalOptions="Center"/>
+                                <Label Text="Kullanıcı Yönetimi" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <Label Text="{x:Static helpers:IconFont.ChevronRight}" 
+                                   FontFamily="MaterialSymbols" 
+                                   HorizontalOptions="End" 
+                                   VerticalOptions="Center"
+                                   TextColor="Gray"/>
+                        </Grid>
+                        
+                        <BoxView Style="{StaticResource Separator}"/>
+                        
+                        <Grid Padding="15,12">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToPendingUsersCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="⏳" FontSize="18" VerticalOptions="Center"/>
+                                <Label Text="Onay Bekleyen Kullanıcılar" VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout HorizontalOptions="End" Spacing="5">
+                                <Border StrokeShape="RoundRectangle 10"
+                                        BackgroundColor="OrangeRed"
+                                        Padding="8,2"
+                                        IsVisible="{Binding HasPendingUsers}">
+                                    <Label Text="{Binding PendingUsersCount}" 
+                                           FontSize="12" 
+                                           TextColor="White"/>
+                                </Border>
+                                <Label Text="{x:Static helpers:IconFont.ChevronRight}" 
+                                       FontFamily="MaterialSymbols" 
+                                       VerticalOptions="Center"
+                                       TextColor="Gray"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+            
+            <!-- Çıkış -->
+            <Border Style="{StaticResource CardView}" Margin="0,10,0,30">
+                <Grid Padding="15,12">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                    </Grid.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="🚪" FontSize="18" VerticalOptions="Center"/>
+                        <Label Text="Çıkış Yap" TextColor="Red" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Border>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>  

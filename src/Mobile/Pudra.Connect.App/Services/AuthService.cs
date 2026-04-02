@@ -1,4 +1,5 @@
 using Pudra.Connect.App.Models;
+using Pudra.Connect.App.Models.Auth;
 using Pudra.Connect.App.Services.Interfaces;
 
 namespace Pudra.Connect.App.Services;
@@ -15,5 +16,10 @@ public class AuthService : IAuthService
         // Veya PostAsync'i public yapabiliriz. Şimdilik bu şekilde bırakıyorum.
         // Bu, ApiService'in iç mantığıdır.
         return _apiService.PostAsync<LoginResponse>("/api/auth/login", new { username, password });
+    }
+    
+    public Task<PublicRegisterResponseDto?> RegisterAsync(PublicRegisterRequestDto request)
+    {
+        return _apiService.PostAsync<PublicRegisterResponseDto>("/api/auth/public-register", request);
     }
 }

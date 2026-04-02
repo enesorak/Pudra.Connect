@@ -92,4 +92,10 @@
 
 		<AndroidSigningStorePass>102030</AndroidSigningStorePass>
 	</PropertyGroup>
+
+
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios')) and '$(Configuration)' == 'Debug'">
+		<_RequireCodeSigning>false</_RequireCodeSigning>
+		<CodesignKey>-</CodesignKey>
+	</PropertyGroup>
 </Project>

@@ -65,4 +65,10 @@ public partial class LoginPage : ContentPage
                 "Tamam");
         }
     }
+    
+    
+    private async void OnRegisterTapped(object sender, TappedEventArgs e)
+    {
+        await Shell.Current.GoToAsync("RegisterPage");
+    }
 }
